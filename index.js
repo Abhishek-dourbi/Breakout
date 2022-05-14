@@ -133,6 +133,13 @@ function checkForCollisions() {
         }
     }
 
+    // check for win
+    if(blocks.length === 0) {
+        scoreDisplay.innerHTML = 'YOU WIN';
+        clearInterval(timerId);
+        document.removeEventListener('keydown', moveUser);
+    }
+
     // check for user collisions
     if(
         ballCurrPosition[0] > currPosition[0] && 
