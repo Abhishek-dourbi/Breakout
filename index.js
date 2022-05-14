@@ -133,6 +133,16 @@ function checkForCollisions() {
         }
     }
 
+    // check for user collisions
+    if(
+        ballCurrPosition[0] > currPosition[0] && 
+        ballCurrPosition[0] < (currPosition[0] + blockWidth) && 
+        ballCurrPosition[1] > currPosition[1] &&
+        ballCurrPosition[1] < currPosition[1] + blockHeight
+    ) {
+        changeDirection();
+    }
+
 
     // check for wall collisions
     if(
