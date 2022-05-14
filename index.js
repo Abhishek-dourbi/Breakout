@@ -6,6 +6,7 @@ const boardWidth = 560;
 const boardHeight = 300;
 const ballDiameter = 20;
 let timerId;
+let score = 0;
 
 let xDirection = 2;
 let yDirection = 2;
@@ -117,6 +118,22 @@ timerId = setInterval(moveBall, 30);
 
 // check for collisions
 function checkForCollisions() {
+    // check for block collisions
+    for(let i = 0; i < blocks.length; i++) {
+        if(
+            ballCurrPosition[0] > blocks[i].bottomLeft[0] && ballCurrPosition[0] < blocks[i].bottomRight[0] &&
+            (ballCurrPosition[1] + ballDiameter) > blocks[i].bottomLeft[1] && ballCurrPosition[1] < blocks[i].topLeft[1]
+        ) {
+            const allBlocks = Array.from(document.querySelectorAll('.block'));
+            allBlocks[i].classList.remove('block');
+            blocks.splice(i, 1);
+            changeDirection();
+            score++;
+            scoreDisplay.innerHTML = score;
+        }
+    }
+
+
     // check for wall collisions
     if(
         ballCurrPosition[0] >= (boardWidth - ballDiameter) || 
