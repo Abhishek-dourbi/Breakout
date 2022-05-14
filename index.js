@@ -1,6 +1,7 @@
 const grid = document.querySelector('.grid');
 const blockWidth = 100;
 const blockHeight = 20;
+const boardWidth = 560;
 
 const userStart = [230, 10];
 let currPosition = userStart;
@@ -55,6 +56,30 @@ addBlocks();
 // add user
 const user = document.createElement('div');
 user.classList.add('user');
-user.style.left = currPosition[0] + 'px';
-user.style.bottom = currPosition[1] + 'px';
+drawUser();
 grid.appendChild(user);
+
+// draw user
+function drawUser() {
+    user.style.left = currPosition[0] + 'px';
+    user.style.bottom = currPosition[1] + 'px';
+}
+
+// move user
+function moveUser(e) {
+    switch(e.key) {
+        case 'ArrowLeft':
+            if(currPosition[0] > 0) {
+                currPosition[0] -= 10; 
+                drawUser();
+            }
+            break;
+        case 'ArrowRight':
+            if(currPosition[0] < boardWidth - blockWidth) {
+                currPosition[0] += 10; 
+                drawUser();
+            }
+            break;
+    }
+}
+document.addEventListener('keydown', moveUser);
