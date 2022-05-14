@@ -2,6 +2,7 @@ const grid = document.querySelector('.grid');
 const blockWidth = 100;
 const blockHeight = 20;
 const boardWidth = 560;
+let timerId;
 
 const userStart = [230, 10];
 let currPosition = userStart;
@@ -98,3 +99,11 @@ const ball = document.createElement('div');
 ball.classList.add('ball');
 drawBall();
 grid.appendChild(ball);
+
+// move the ball
+function moveBall() {
+    ballCurrPosition[0] += 2;
+    ballCurrPosition[1] += 2;
+    drawBall();
+}
+timerId = setInterval(moveBall, 30);
